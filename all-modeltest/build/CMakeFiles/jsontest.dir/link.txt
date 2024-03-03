@@ -1,0 +1,1 @@
+/usr/bin/c++  -g  -rdynamic CMakeFiles/jsontest.dir/jsontest.cpp.o  -o ../bin/jsontest 
