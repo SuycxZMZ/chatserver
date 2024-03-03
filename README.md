@@ -11,5 +11,6 @@ make
 ```C++
 ./build.sh
 ```
+
 需要安装的环境 nginx mysql redis
 
