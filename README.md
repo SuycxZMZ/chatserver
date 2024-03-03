@@ -13,6 +13,10 @@ make
 ```
 
 需要安装的环境 nginx mysql redis
-致谢：第三方JSON库 https://github.com/nlohmann/json
-     https://github.com/shenmingik
+
+致谢：
+
+    第三方JSON库 https://github.com/nlohmann/json
+
+    https://github.com/shenmingik
 
