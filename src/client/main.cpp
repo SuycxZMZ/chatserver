@@ -159,6 +159,7 @@ int main(int argc, char **argv)
                 }
                 else
                 {
+                    // cout << "----------------- loginMsg send over ----------------" << endl;
                     // 接收服务器端反馈
                     char buffer[BUFF_SIZE] = {0};
                     len = recv(client_fd, buffer, BUFF_SIZE, 0);
@@ -169,7 +170,9 @@ int main(int argc, char **argv)
                     else
                     {
                         // 反序列化
+                        // cout << "----------------- start pase json ----------------" << endl;
                         json response_js = json::parse(buffer);
+                        // cout << "----------------- pase json over ----------------" << endl;
                         // 登录失败
                         if (response_js["errno"].get<int>() != 0)
                         {

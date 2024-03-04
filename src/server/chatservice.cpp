@@ -1,5 +1,6 @@
 #include "chatservice.hpp"
 #include "public.hpp"
+#include <iostream>
 #include <functional>
 #include <string>
 #include <vector>
@@ -82,9 +83,14 @@ void ChatService::login(const TcpConnectionPtr &conn, json &js, Timestamp time)
             // 登陆成功之后 向redis订阅id
             _redis.subscribe(id);
 
+            // std::cout << "--------------------" << endl;
+            // std::cout << "userId : " << id << " userPwd : " << pwd << endl;
+
             // 登陆成功， 用户信息 offline --> online
             user.setState("online");
+            // segmentation fault
             _usermodel.updateState(user);
+            // std::cout << "--------------------" << endl;
 
             json response;
             response["msgid"] = LOGIN_ACK;
@@ -154,7 +160,7 @@ void ChatService::login(const TcpConnectionPtr &conn, json &js, Timestamp time)
         json response;
         response["msgid"] = LOGIN_ACK;
         response["errno"] = 1;
-        response["errmsg"] = "用户不存在";
+        response["errmsg"] = "用户不存在或密码错误";
         conn->send(response.dump());
     }
 }
