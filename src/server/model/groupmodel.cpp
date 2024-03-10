@@ -41,8 +41,7 @@ vector<Group> GroupModel::queryGroups(int userid)
     // 2，再根据群组信息，查询属于该群组所有用户的id并且和user表进行多表联合查询，查出用户的详细信息
     // 组装 sql 语句
     char sql[1024] = {0};
-    sprintf(sql, "select a.id, a.groupname, a.groupdesc from allgroup a inner join \
-                    groupuser b on a.id = b.groupid where b.userid = %d", userid);
+    sprintf(sql, "select a.id, a.groupname, a.groupdesc from allgroup a inner join groupuser b on a.id = b.groupid where b.userid = %d", userid);
     vector<Group> groupVec;
     MySQL mysql;
     if (mysql.connect())
@@ -65,8 +64,7 @@ vector<Group> GroupModel::queryGroups(int userid)
 
     for (Group &group : groupVec)
     {
-        sprintf(sql, "select a.id, a.name, a.state, b.grouprole from user a inner join \
-                        groupuser b on b.userid = a.id where b.group = %d", group.getId());
+        sprintf(sql, "select a.id, a.name, a.state, b.grouprole from user a inner join groupuser b on b.userid = a.id where b.groupid = %d", group.getId());
 
         MYSQL_RES* res = mysql.query(sql);
         if (res != nullptr)
